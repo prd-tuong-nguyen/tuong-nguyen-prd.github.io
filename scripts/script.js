@@ -92,7 +92,10 @@ const get_assistant_response = (user_message) => {
     // Show response from LLM
     set_assistant_typing(false);
     let assistant_message = response.response;
-    add_assistant_message(assistant_message, true);
+    let assistant_voice = response.voice;
+    add_assistant_message(assistant_message, false);
+    console.log(assistant_voice)
+    speak(assistant_voice)
     console.log(">> Assistant:", assistant_message)
   }, (error) => {
     set_assistant_typing(false);
@@ -113,4 +116,4 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
 
 startCam();
 add_user_message("Let's get start interview");
-add_assistant_message("Sure, can you introduce about yourself?", true);
+add_assistant_message("Sure, can you introduce about yourself?", false);
