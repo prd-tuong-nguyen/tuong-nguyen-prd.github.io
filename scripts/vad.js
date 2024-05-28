@@ -30,13 +30,15 @@ async function startVad() {
             set_user_typing(false)
             speech_to_text(audio, (response) => {
                 let user_message = response.response;
-                add_user_message(user_message);
-                console.log(">> User:", user_message)
-                // Wait for show user message text
-                setTimeout(() => {
-                    // Send text and image to server
-                    get_assistant_response(user_message)
-                }, 10);
+                if (user_message.length > 0){
+                    add_user_message(user_message);
+                    console.log(">> User:", user_message)
+                    // Wait for show user message text
+                    setTimeout(() => {
+                        // Send text and image to server
+                        get_assistant_response(user_message)
+                    }, 10);
+                }
             });
         },
     })
