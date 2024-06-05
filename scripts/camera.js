@@ -1,3 +1,8 @@
+const webcamElement = document.getElementById('webcam');
+const btn_camera = document.getElementById("btn-camera")
+const canvas = document.getElementById('canvas');
+
+
 const stogle_webcam = () => {
     if (webcamElement.srcObject != null) {
         stopCam()
@@ -32,6 +37,5 @@ const stopCam = () => {
 
 const capture_image = () => {
     canvas.getContext('2d').drawImage(webcamElement, 0, 0);
-    image = canvas.toDataURL("image/jpeg");
-    return image
+    return canvas.toDataURL("image/jpeg")
 }

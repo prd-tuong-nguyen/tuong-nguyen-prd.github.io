@@ -3,3 +3,32 @@
     height: auto;
     max-height: 100%;
 }
+#avatar { display: block; width: 200px; height: 150px; pointer-events:none}
+.main-video-container {
+    width: auto;
+    height: auto;
+    border: 2px solid #fff;
+}
+
+.main-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-video-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 150px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.overlay-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

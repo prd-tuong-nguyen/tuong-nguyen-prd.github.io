@@ -3,13 +3,13 @@ const body = document.querySelector('body')
 const closeBtn = document.querySelector('.btn-close-right')
 const rightSide = document.querySelector('.right-side')
 const expandBtn = document.querySelector('.expand-btn');
-const webcamElement = document.getElementById('webcam');
-const canvas = document.getElementById('canvas'); 
+const canvas = document.getElementById('canvas');
 const chat_box = document.getElementById("chat-area");
 const btn_mic = document.getElementById("btn-mic")
 const btn_camera = document.getElementById("btn-camera")
 const txt_chat = document.getElementById("chat-input")
-const btn_send_msg = document.getElementById("btn-send-msg")
+import { text_to_speech } from "./avatar_interviewer.js";
+import { startVad, pause_vad, resume_vad } from "./vad.js";
 
 const messages = [];
 let myvad = null;
@@ -76,6 +76,9 @@ const update_setting = () => {
   toastr.success("Update config successfully!")
 }
 
+const btn_update_setting = document.getElementById("save-btn")
+btn_update_setting.addEventListener("click", update_setting)
+
 const send_user_message = () => {
   msg = txt_chat.value
   txt_chat.value = ""
@@ -86,17 +89,25 @@ const send_user_message = () => {
   }
 }
 
-const get_assistant_response = (user_message) => {
+const btn_send_msg = document.getElementById("btn-send-msg")
+btn_send_msg.addEventListener("click", send_user_message)
+
+export const get_assistant_response = (user_message) => {
   set_assistant_typing(true);
+  let startTimer = new Date().getTime();
   send_message(user_message, capture_image(), messages, (response) => {
     // Show response from LLM
     set_assistant_typing(false);
     let assistant_message = response.response;
-    let assistant_voice = response.voice;
+    // let assistant_voice = response.voice;
     add_assistant_message(assistant_message, false);
-    console.log(assistant_voice)
-    speak(assistant_voice)
-    console.log(">> Assistant:", assistant_message)
+    console.log(">> Time:", new Date().getTime() - startTimer)
+    startTimer = new Date().getTime();
+    text_to_speech(assistant_message)
+    console.log(">> Time 123123123:", new Date().getTime() - startTimer)
+    // console.log(assistant_voice)
+    // speak(assistant_voice)
+    // console.log(">> Assistant:", assistant_message)
   }, (error) => {
     set_assistant_typing(false);
     toastr.error("Error on send message ...") 
