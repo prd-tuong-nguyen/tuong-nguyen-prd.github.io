@@ -1,10 +1,9 @@
-BASE_URL = "https://694c50e1576c.ngrok.app"
+BASE_URL = "https://e025-3-231-99-84.ngrok-free.app"
 
 axios.defaults.baseURL = BASE_URL
 document.getElementById("be-server").value = BASE_URL
 
 const send_message = (text, image, messages, callback, on_error) => {
-
     axios.post('/virtual-assistant/message', {
         ID: "tuongnh",
         text: text,

@@ -1,14 +1,34 @@
-const pause_vad = () => {
+import { get_assistant_response } from "./script.js"
+const btn_mic = document.getElementById("btn-mic")
+
+let myvad = null
+
+export const pause_vad = () => {
     btn_mic.style.color = "#2c303a"
-    if (myvad != null) myvad.pause()
+    if (myvad != null) {
+        myvad.isRunning = false
+        myvad.pause()
+    }
 }
 
-const resume_vad = () => {
+export const resume_vad = () => {
     btn_mic.style.color = "#006dcc"
-    if (myvad != null) myvad.start()
+    if (myvad != null) {
+        myvad.isRunning = true
+        myvad.start()
+    }
 }
+btn_mic.addEventListener("click", () => {
+    if (myvad != null) {
+        if (myvad.isRunning) {
+            pause_vad()
+        } else {
+            resume_vad()
+        }
+    }
+})
 
-async function startVad() {
+export async function startVad() {
     myvad = await vad.MicVAD.new({
         positiveSpeechThreshold: 0.8,
         // minSpeechFrames: 10,

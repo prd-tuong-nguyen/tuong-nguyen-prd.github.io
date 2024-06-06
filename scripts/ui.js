@@ -1,3 +1,7 @@
+const chat_box = document.getElementById("chat-area");
+const messages = [];
+const assistant_name = "OliviB";
+
 const add_user_message = (message) => {
     content = `
     <div class="message-wrapper reverse">
@@ -41,10 +45,10 @@ const add_user_message = (message) => {
       "content": message
     })
     // Speak
-    if (say) {
-      speech.text = message
-      speaker.speak(speech);
-    }
+    // if (say) {
+    //   speech.text = message
+    //   speaker.speak(speech);
+    // }
   }
   
   const set_user_typing = (enable) => {
@@ -68,7 +72,7 @@ const add_user_message = (message) => {
       chat_box.scrollTop = chat_box.scrollHeight;
     } else {
       let elements = document.querySelectorAll('div.user-typing');
-      for(var i = 0; i < elements.length; i++){
+      for(let i = 0; i < elements.length; i++){
         elements[i].remove();
       } 
     }
@@ -94,7 +98,7 @@ const add_user_message = (message) => {
       chat_box.scrollTop = chat_box.scrollHeight;
     } else {
       let elements = document.querySelectorAll('div.assistant-typing');
-      for(var i = 0; i < elements.length; i++){
+      for(let i = 0; i < elements.length; i++){
         elements[i].remove();
       } 
     }
