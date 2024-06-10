@@ -1,3 +1,4 @@
 youtube.mp4
-./avatars
-./scripts/tts
+avatars
+scripts/tts
+*.data
